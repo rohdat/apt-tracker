@@ -1,0 +1,24 @@
+<html>
+<head>
+	<title>This place looks awesome!</title>
+</head>
+<body>
+<form method="POST">
+<table>
+	<tr>
+		<td>Address:</td>
+		<td><input type="text" name="addr" placeholder="{{apt.addr}}"></td>
+	</tr>
+	<tr>
+		<td>Rent:</td>
+		<td><input type="text" name="rent" placeholder="{{apt.rent}}"></td>
+	</tr>
+	<tr>
+		<td><a href="{{apt.link}}">View</a></td>
+		<td><a href="/apts/{{apt.id}}/delete">Delete</a></td>
+	</tr>
+</table>
+	<input type="submit">
+</form>
+</body>
+</html>

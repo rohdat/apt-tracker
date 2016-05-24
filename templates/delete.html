@@ -1,0 +1,28 @@
+<html>
+<head>
+	<title>You have to let go</title>
+</head>
+<body>
+<form method="POST">
+	<div>Are you sure you want to delete this apartment?</div>
+	<input type="submit" value="YES">
+	<a href="/apts/{{apt.id}}/edit">NO</a>
+</form>
+<table>
+	<tr>
+		<td>Address:</td>
+		<td>{{apt.addr}}</td>
+	</tr>
+	<tr>
+		<td>Rent:</td>
+		<td>{{apt.rent}}</td>
+	</tr>
+	<tr>
+		<td><a href="{{apt.link}}">View</a></td>
+	</tr>
+</table>
+<!-- <form method="POST">
+	<input type="submit">
+</form> -->
+</body>
+</html>
