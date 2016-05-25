@@ -7,22 +7,42 @@
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 	<script src="static/map_add.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 {%endblock%}
 {%block content%}
 	<button type="button" class='btn-success' onClick="location.href='/new'"><span class="glyphicon glyphicon-plus"></span> NEW</button>
 	<hr>
 	<div id="map"></div>
-	{% for a in apts %}
-	<div class="apt_enum">
-		<div class="container">
-		<h2>{{a.addr}}</h2>
-		<h3>${{a.rent}}</h3>
-		<button type="button" class="btn" onClick="window.open('{{a.link}}')"><span class="glyphicon glyphicon-eye-open"></span> View</button>
-		<button type="button" class="btn-primary" onClick="location.href='/apts/{{a.id}}/edit'"><span class="glyphicon glyphicon-edit"></span> Edit</button>
-		<button type="button" class="btn-danger" onClick="deleteConfirm({{a.id}})"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+	<div class="container">
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Address</th>
+						<th onclick="sortTable(2)">Rent</th>
+						<th>Action</th>
+						<th></th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody id="apt_table">
+
+				{% for a in apts %}
+				<tr id="row-{{a.id}}">
+					<td>{{a.id}}</td>
+					<td>{{a.addr}}</td>
+					<td>${{a.rent}}</td>
+					<td>
+					<button type="button" class="btn" onClick="window.open('{{a.link}}')"><span class="glyphicon glyphicon-eye-open"></span> </button>
+					<button type="button" class="btn-primary" onClick="location.href='/apts/{{a.id}}/edit'"><span class="glyphicon glyphicon-edit"></span> </button>
+					<button type="button" class="btn-danger" onClick="deleteConfirm({{a.id}})"><span class="glyphicon glyphicon-trash"></span> </button>
+					<td>
+				</tr>
+				{% endfor %}
+				</tbody>
+			</table>
 		</div>
 	</div>
-	{% endfor %}
-	<script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
 {%endblock%}

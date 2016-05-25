@@ -5,7 +5,7 @@ function initMap() {
 	var mapDiv = 'map';
 	idmap = 'map';
 	mapDiv = document.getElementById(idmap);
-	mapDiv.style.width='1000px';
+	mapDiv.style.width='250px';
 	mapDiv.style.height='250px';
 	mapDiv.style.backgroundColor='#CCC';
 	var markers = [];
@@ -14,11 +14,11 @@ function initMap() {
 		json.Apt.forEach(function (a){
 			// console.log(a.id);
 			addr = a.addr;
-			console.log(addr);
+			// console.log(addr);
 			geocodeMe(addr, function (latlon){
 				bound.extend(latlon);
-				console.log("During for loop:");
-				console.log(bound.getCenter().toJSON());
+				// console.log("During for loop:");
+				// console.log(bound.getCenter().toJSON());
 				var contentString = getContent(a);
 				var marker = new google.maps.Marker ({
 					map:map,
@@ -35,6 +35,22 @@ function initMap() {
 
 					infowindow.open(map,marker);
 				})
+				var eid = 'row-'+a.id;
+				var row_active = document.getElementById(eid);
+				console.log(row_active);
+				marker.addListener('mouseover', function () {
+					if (!row_active.className.match(/.*success.*/)) {
+						row_active.className = "success";
+					}
+				})
+				marker.addListener('mouseout', function () {
+					console.log("Hover detected row-"+a.id);
+					if (row_active.className.match(/.*success.*/)) {
+						row_active.className = "";
+					}
+				})
+
+
 				updateMap();
 			})
 		})
@@ -44,7 +60,7 @@ function initMap() {
 		center: mapCenter,
 		zoom:14
 	});
-	console.log(bound.getCenter().toJSON());
+	// console.log(bound.getCenter().toJSON());
 	
 	var updateMap = function (){
 		mapCenter = bound.getCenter();
@@ -78,4 +94,35 @@ function deleteConfirm(id) {
 	} else {
 		// window.location.replace("main");
 	}
+}
+
+var asc = 1;
+window.onload = function () {
+	apt_table = document.getElementById('apt_table');
+	console.log("Window finished loading")
+}
+
+function sortTable(col){
+	var rows = apt_table.rows,
+	rlen = rows.length
+	arr = new Array();
+	var i, j, cells, clen;
+    for (i = 0; i < rlen; i++) {
+        cells = rows[i].cells;
+        clen = cells.length;
+        arr[i] = new Array();
+        for (j = 0; j < clen; j++) {
+            arr[i][j] = cells[j].innerHTML;
+        }
+    }
+    console.log("Sorting...")
+	arr.sort(function (a, b) {
+		return (a[col] == b[col]) ? 0 : ((a[col] > b[col]) ? asc : -1 * asc);
+	});
+	asc = -1*asc;
+	for(i = 0; i < rlen; i++){
+        arr[i] = "<td>"+arr[i].join("</td><td>")+"</td>";
+    }
+    apt_table.innerHTML = "<tr>"+arr.join("</tr><tr>")+"</tr>";
+
 }
