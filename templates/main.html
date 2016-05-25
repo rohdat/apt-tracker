@@ -1,21 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>
-		All your apts!
-	</title>
+{%extends "base.html"%}
+{%block title%}All your apts!{%endblock%}
+{%block head%}
+{{ super() }}
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-</head>
-
-<body>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 	<script src="static/map_add.js"></script>
-	<button type="button" class='btn-success' onClick="location.href='/new'">NEW</button>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+{%endblock%}
+{%block content%}
+	<button type="button" class='btn-success' onClick="location.href='/new'"><span class="glyphicon glyphicon-plus"></span> NEW</button>
 	<hr>
+	<div id="map"></div>
 	{% for a in apts %}
 	<div class="apt_enum">
 		<div class="container">
@@ -24,10 +21,8 @@
 		<button type="button" class="btn" onClick="window.open('{{a.link}}')"><span class="glyphicon glyphicon-eye-open"></span> View</button>
 		<button type="button" class="btn-primary" onClick="location.href='/apts/{{a.id}}/edit'"><span class="glyphicon glyphicon-edit"></span> Edit</button>
 		<button type="button" class="btn-danger" onClick="deleteConfirm({{a.id}})"><span class="glyphicon glyphicon-trash"></span> Delete</button>
-		<div id="map-{{a.id}}"></div>
 		</div>
 	</div>
 	{% endfor %}
 	<script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
-</body>
-</html>
+{%endblock%}
