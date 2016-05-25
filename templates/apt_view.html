@@ -1,17 +1,27 @@
-<html>
-<head>
-	<title>This place looks awesome!</title>
-</head>
-<body>
+{%extends "base.html"%}
+{%block title%}This one's awesome!{%endblock%}
+{%block head%}
+{{ super() }}
+{%endblock%}
+{%block content%}
 <form method="POST">
+
 <table>
 	<tr>
 		<td>Address:</td>
-		<td><input type="text" name="addr" placeholder="{{apt.addr}}"></td>
+		<td><input type="text" name="addr" value="{{apt.addr}}"></td>
 	</tr>
 	<tr>
 		<td>Rent:</td>
-		<td><input type="text" name="rent" placeholder="{{apt.rent}}"></td>
+		<td><input type="text" name="rent" value="{{apt.rent}}"></td>
+	</tr>
+	<tr>
+		<td>Tel:</td>
+		<td><input type="text" name="rent" value="{{apt.tel}}"></td>
+	</tr>
+	<tr>
+		<td>Email:</td>
+		<td><input type="text" name="rent" value="{{apt.emailaddr}}"></td>
 	</tr>
 	<tr>
 		<td><a href="{{apt.link}}">View</a></td>
@@ -20,5 +30,4 @@
 </table>
 	<input type="submit">
 </form>
-</body>
-</html>
+{%endblock%}
