@@ -1,0 +1,21 @@
+<!doctype HTML>
+<html>
+	<head>
+		{%block head%}
+			<title> {%block title%} {%endblock%} - FindYourApt</title>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+			<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+		{%endblock%}	
+	</head>
+	<body>
+		<div id="content">
+			<button type="button" class="btn" onClick="window.open('{{url_for('mainPage')}}')"><span class="glyphicon glyphicon-home"></span> HOME</button>
+			{%block content%}
+				
+			{%endblock%}
+
+		</div>
+
+	</body>
+</html>
